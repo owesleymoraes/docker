@@ -37,7 +37,19 @@ A ideia nesse pequeno projeto react typescript com vite e styled components é m
 
 - Abrir um terminal do vs-code na pasta
 - Criar um file Dockerfile
-- Escrever os parâmetros de criação de uma imagem
+- Escrever os parâmetros de criação de uma imagem:
+
+
+FROM node:lts-alpine
+WORKDIR /src
+COPY . .
+RUN yarn install
+RUN yarn build
+RUN yarn global add serve
+CMD ["serve", "-s", "dist"]
+EXPOSE 3000
+
+
 - Criar uma uma imagem com o comando no cmd: `docker build -t app .`
 - Verificar imagem criada com o comando `docker images`
-- Rodar a imagem (Criar um container a partir dessa imagem com o comando e abrirno shell) : `docker run -it app sh`
+- Rodar a imagem (Criar um container a partir dessa imagem com o comando e abrir no shell) : `docker run -dp 3000:3000 app`, vinculando a porta da imagem com a porta local.
